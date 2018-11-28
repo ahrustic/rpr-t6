@@ -4,30 +4,28 @@
 <?import java.net.URL?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <GridPane hgap="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="4.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <stylesheets>
-        <URL value="@/css/formular.css" />
+        <URL value="@formular.css" />
     </stylesheets>
     <columnConstraints>
         <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
@@ -38,6 +36,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints />
     </rowConstraints>
     <padding>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -71,7 +70,12 @@
 
         <Label prefHeight="25.0" prefWidth="118.0" text="          JMBG:" GridPane.rowIndex="4" />
         <Label prefHeight="24.0" prefWidth="118.0" text="   Datum rodjenja:" GridPane.rowIndex="5" />
-        <Label prefHeight="17.0" prefWidth="119.0" text="   Mjesto rodjenja:"  GridPane.rowIndex="6" />
+        <Label prefHeight="17.0" prefWidth="119.0" text="   Mjesto rodjenja:" GridPane.rowIndex="6" />
+
+
+        <TextField fx:id="jmbg" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField fx:id="datum" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
         <ComboBox fx:id="mjesto" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
             <items>
                 <FXCollections fx:factory="observableArrayList">
@@ -85,26 +89,22 @@
             </items>
         </ComboBox>
 
-        <TextField fx:id="jmbg" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <TextField fx:id="datum" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-
-        <Separator prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
         <Separator prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+        <Separator prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
 
-        <Separator prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
         <Separator prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+        <Separator prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
 
-        <Label prefHeight="24.0" prefWidth="117.0" text="Adresa stanovanja:" GridPane.rowIndex="0" GridPane.columnIndex="2" />
-        <Label prefHeight="22.0" prefWidth="116.0" text="  Kontakt telefon:" GridPane.rowIndex="1" GridPane.columnIndex="2" />
-        <Label prefHeight="26.0" prefWidth="118.0" text="    Email adresa:" GridPane.rowIndex="2" GridPane.columnIndex="2" />
-        <TextField fx:id="adresa" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-        <TextField fx:id="telefon" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-        <TextField fx:id="email" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-        <Label prefHeight="17.0" prefWidth="105.0" text="        Odsjek:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-        <Label prefHeight="17.0" prefWidth="117.0" text="   Godina studija" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-        <Label prefHeight="17.0" prefWidth="119.0" text="  Upisan/a je kao:" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-        <CheckBox fx:id="pripadnost" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="18.0" prefWidth="235.0" text="Pripadnost borackim kategorijama" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" />
-        <ComboBox fx:id="smjer" prefHeight="27.0" prefWidth="120.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+        <Label prefHeight="24.0" prefWidth="117.0" text="Adresa stanovanja:" GridPane.columnIndex="3" />
+        <Label prefHeight="22.0" prefWidth="116.0" text="  Kontakt telefon:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        <Label prefHeight="26.0" prefWidth="118.0" text="    Email adresa:" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+        <TextField fx:id="adresa" GridPane.columnIndex="4" />
+        <TextField fx:id="telefon" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+        <TextField fx:id="email" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+        <Label prefHeight="17.0" prefWidth="105.0" text="        Odsjek:" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+        <Label prefHeight="17.0" prefWidth="117.0" text="   Godina studija" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+        <Label prefHeight="17.0" prefWidth="119.0" text="  Upisan/a je kao:" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+         <ComboBox fx:id="smjer" prefHeight="27.0" prefWidth="120.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="RI" />
@@ -117,7 +117,7 @@
                 <Cursor fx:constant="TEXT" />
             </cursor>
         </ComboBox>
-        <ComboBox fx:id="godina" prefHeight="27.0" prefWidth="118.0" GridPane.columnIndex="3" GridPane.rowIndex="5">
+        <ComboBox fx:id="godina" prefHeight="27.0" prefWidth="118.0" GridPane.columnIndex="4" GridPane.rowIndex="5">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="I" />
@@ -126,7 +126,7 @@
                 </FXCollections>
             </items>
         </ComboBox>
-        <ComboBox fx:id="status" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
+        <ComboBox fx:id="status" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="6">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="redovan" />
@@ -134,6 +134,10 @@
                 </FXCollections>
             </items>
         </ComboBox>
-        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="194.0" text="POTVRDI" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8" />
+        <CheckBox fx:id="pripadnost" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="18.0" prefWidth="235.0" text="Pripadnost borackim kategorijama" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+
+        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="428.0" text="POTVRDI" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8" />
+      <Separator orientation="VERTICAL" prefHeight="108.0" prefWidth="111.0" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="3" />
+      <Separator orientation="VERTICAL" prefHeight="108.0" prefWidth="111.0" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.rowSpan="3" />
     </children>
 </GridPane>
