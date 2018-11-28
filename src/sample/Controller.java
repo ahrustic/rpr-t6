@@ -8,6 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 
 import java.awt.*;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,6 +36,7 @@ public class Controller {
     private boolean datumValidno;
     private boolean emailValidno;
     private int brojTacaka = 0;
+    public String uporediSaJmbg;
 
     public boolean formularValidan() {
         return (imeValidno && prezimeValidno && indeksValidan && jmbgValidno && datumValidno && emailValidno);
@@ -59,40 +62,38 @@ public class Controller {
 
 
     private boolean ispravanDatum(String n) {
-        if (n.length() > 11 || n.length() < 11) return false;
-        /*if (n.charAt(n.length()-1) != '.') return false;
-        if (n.charAt(2) != '.') return false;
-        if (n.charAt(5) != '.') return false;*/
-
-        String regex = "^(.+).(.+.+.+.+.+).(.+).$";
-
-        Pattern pattern = Pattern.compile(regex);
-
-        Matcher matcher = pattern.matcher(n);
-        if (!matcher.matches()) return false;
-
-
-
-
-        int dan = Integer.parseInt(n.substring(0,1).trim());
-        int mjesec = Integer.parseInt(n.substring(3,4).trim());
-        int godina = Integer.parseInt(n.substring(6,10).trim());
-        if (mjesec < 1 || mjesec > 12) return false;
-        if (dan > 31) return false;
-        if (godina > 2018) return false;
-        if (godina == 2018 && mjesec == 12) return false;
-
-
-        for (int i = 0; i < n.length(); i++) {
-            if (n.charAt(i) >= '0' && n.charAt(i) <= '9') {
-                for (int j = 0; j < n.length(); j++) {
-                    if (j > 0 && (n.charAt(j) == '.') && (n.charAt(j-1) == '.')) return false;
-                    else if (n.charAt(j) == '.') return true;
-                }
-            }
+        if(n.length()<8) return false;
+        int d = 0, m = 0, g = 0;
+        String dan = "", mjesec = "", godina = "";
+        if (n.length() == 8) {
+            dan = n.substring(0, 2);
+            mjesec = n.substring(2, 4);
+            godina = n.substring(4, 8);
         }
+        else if (n.length() == 10) {
+            if (n.charAt(2) == n.charAt(5) && (n.charAt(2) == '.' || n.charAt(2) == '/' || n.charAt(2) == '-')) {
+                dan = n.substring(0, 2);
+                mjesec = n.substring(3, 5);
+                godina = n.substring(6, 10);
+            }
+        } else return false;
+        try {
+            d = Integer.parseInt(dan);
+            m = Integer.parseInt(mjesec);
+            g = Integer.parseInt(godina);
+        }catch (Exception ex){}
 
-        return false;
+        if (d==0 || m==0 || g==0 )return false;
+        if (g > 2018 || (g == 2018 && m == 12)) return false;
+        boolean daLiJeDatumDobar = true;
+        try {
+            LocalDate.of(g, m, d);
+        } catch (DateTimeException e) {
+            daLiJeDatumDobar = false;
+        }
+        return daLiJeDatumDobar;
+
+
     }
 
     private boolean ispravanJMBG(String n) {
@@ -104,9 +105,6 @@ public class Controller {
     }
 
     private boolean ispravanEmail(String n) {
-        /*if (n.charAt(n.length()-3) != '.' || n.charAt(n.length()-4) != '.') return false;
-        for (int i = 0; i < n.length(); i++) if (n.charAt(i) == '@') return true;
-        return false;*/
 
         String regex = "^(.+)@(.+.+.+.+.+).(.+)$";
 
@@ -123,14 +121,6 @@ public class Controller {
         for (int i = 0; i < n.length(); i++) if (!(n.charAt(i) >= '0' && n.charAt(i) <= '9')) return false;
         return !n.trim().isEmpty();
     }
-
-    /*private boolean ispravnaAdresa(String n) {
-        return !n.trim().isEmpty();
-    }
-    private boolean ispravanTelefon(String n) {
-        for (int i = 0; i < n.length(); i++) if (n.charAt(i) == '/' || n.charAt(i) == '-') return true;
-        return false;
-    } NEPOTREBNO */
 
     @FXML
     public void initialize() {
@@ -235,34 +225,7 @@ public class Controller {
                 }
             }
         });
-        /*adresa.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (ispravnaAdresa(n)) {
-                    adresa.getStyleClass().removeAll("nijepopunjeno");
-                    adresa.getStyleClass().add("popunjeno");
-                    adresaValidno = true;
-                } else {
-                    adresa.getStyleClass().removeAll("popunjeno");
-                    adresa.getStyleClass().add("nijepopunjeno");
-                    adresaValidno = false;
-                }
-            }
-        });
-        telefon.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (ispravanTelefon(n)) {
-                    telefon.getStyleClass().removeAll("nijepopunjeno");
-                    telefon.getStyleClass().add("popunjeno");
-                    telefonValidno = true;
-                } else {
-                    telefon.getStyleClass().removeAll("popunjeno");
-                    telefon.getStyleClass().add("nijepopunjeno");
-                    telefonValidno = false;
-                }
-            }
-        }); ADRESA I TELEFON IPAK MOGU BITI PRAZNI */
+
     }
 
 
