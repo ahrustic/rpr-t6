@@ -5,6 +5,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Controller {
 
@@ -27,8 +33,7 @@ public class Controller {
     private boolean jmbgValidno;
     private boolean datumValidno;
     private boolean emailValidno;
-    //private boolean adresaValidno;
-    //private boolean telefonValidno;
+    private int brojTacaka = 0;
 
     public boolean formularValidan() {
         return (imeValidno && prezimeValidno && indeksValidan && jmbgValidno && datumValidno && emailValidno);
@@ -54,11 +59,39 @@ public class Controller {
 
 
     private boolean ispravanDatum(String n) {
+        if (n.length() > 11 || n.length() < 11) return false;
+        /*if (n.charAt(n.length()-1) != '.') return false;
+        if (n.charAt(2) != '.') return false;
+        if (n.charAt(5) != '.') return false;*/
+
+        String regex = "^(.+).(.+.+.+.+.+).(.+).$";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher matcher = pattern.matcher(n);
+        if (!matcher.matches()) return false;
+
+
+
+
+        int dan = Integer.parseInt(n.substring(0,1).trim());
+        int mjesec = Integer.parseInt(n.substring(3,4).trim());
+        int godina = Integer.parseInt(n.substring(6,10).trim());
+        if (mjesec < 1 || mjesec > 12) return false;
+        if (dan > 31) return false;
+        if (godina > 2018) return false;
+        if (godina == 2018 && mjesec == 12) return false;
+
+
         for (int i = 0; i < n.length(); i++) {
             if (n.charAt(i) >= '0' && n.charAt(i) <= '9') {
-                for (int j = 0; j < n.length(); j++) if(n.charAt(j) == '/' || n.charAt(j) == '.') return true;
+                for (int j = 0; j < n.length(); j++) {
+                    if (j > 0 && (n.charAt(j) == '.') && (n.charAt(j-1) == '.')) return false;
+                    else if (n.charAt(j) == '.') return true;
+                }
             }
         }
+
         return false;
     }
 
@@ -71,7 +104,17 @@ public class Controller {
     }
 
     private boolean ispravanEmail(String n) {
+        /*if (n.charAt(n.length()-3) != '.' || n.charAt(n.length()-4) != '.') return false;
         for (int i = 0; i < n.length(); i++) if (n.charAt(i) == '@') return true;
+        return false;*/
+
+        String regex = "^(.+)@(.+.+.+.+.+).(.+)$";
+
+        Pattern pattern = Pattern.compile(regex);
+
+            Matcher matcher = pattern.matcher(n);
+            if (matcher.matches()) return true;
+
         return false;
     }
 
