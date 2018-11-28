@@ -76,7 +76,7 @@ public class Controller {
     }
 
     private boolean ispravanIndex(String n) {
-        if (n.length() > 5) return false;
+        if (n.length() != 5) return false;
         for (int i = 0; i < n.length(); i++) if (!(n.charAt(i) >= '0' && n.charAt(i) <= '9')) return false;
         return !n.trim().isEmpty();
     }
@@ -126,12 +126,12 @@ public class Controller {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
                 if (ispravnoPrezime(n)) {
-                    prezime.getStyleClass().removeAll("poljeNijeIspravno ");
+                    prezime.getStyleClass().removeAll("poljeNijeIspravno");
                     prezime.getStyleClass().add("poljeIspravno");
                     prezimeValidno = true;
                 } else {
                     prezime.getStyleClass().removeAll("poljeIspravno");
-                    prezime.getStyleClass().add("poljeNijeIspravno ");
+                    prezime.getStyleClass().add("poljeNijeIspravno");
                     prezimeValidno = false;
                 }
             }
