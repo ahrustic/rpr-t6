@@ -136,7 +136,7 @@
         </ComboBox>
         <CheckBox fx:id="pripadnost" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="18.0" prefWidth="235.0" text="Pripadnost borackim kategorijama" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7" />
 
-        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="428.0" text="POTVRDI" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8" />
+        <Button alignment="CENTER" mnemonicParsing="false" onAction="#dugmeKliknuto" prefHeight="31.0" prefWidth="428.0" text="POTVRDI" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8" />
       <Separator orientation="VERTICAL" prefHeight="108.0" prefWidth="111.0" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="3" />
       <Separator orientation="VERTICAL" prefHeight="108.0" prefWidth="111.0" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.rowSpan="3" />
     </children>
