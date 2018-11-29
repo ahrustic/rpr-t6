@@ -1,5 +1,5 @@
 
-package sample;
+package ba.unsa.etf.rpr.tutorijal06;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -102,7 +102,6 @@ public class Controller {
 
     private boolean ispravanJMBG(String n) {
         if (n.length() < 13) return false;
-        //if (n.substring(0, 6) != uporediSaJmbg) return false;
         int regija = (n.charAt(7) - '0') * 10 + (n.charAt(8) - '0');
         if (regija < 0 || regija > 96) return false;
         int jedinstveniBroj = (n.charAt(9) - '0') * 100 + (n.charAt(10) - '0') * 10 + (n.charAt(11) - '0');
