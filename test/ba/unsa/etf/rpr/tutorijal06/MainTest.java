@@ -1,11 +1,13 @@
-/*package ba.unsa.etf.rpr.tutorijal06;
+package ba.unsa.etf.rpr.tutorijal06;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
@@ -14,14 +16,12 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 @ExtendWith(ApplicationExtension.class)
 
 
 class MainTest {
 
-    @Start*//*
+    @Start
     public void start (Stage stage) throws Exception {
         Parent mainNode = FXMLLoader.load(Main.class.getResource("sample.fxml"));
         stage.setScene(new Scene(mainNode));
@@ -31,7 +31,7 @@ class MainTest {
     @Test
     public void start (FxRobot robot) {
         TextField ime= robot.lookup("#ime").queryAs(TextField.class);
-        assertEquals("", imeField.getText());
+        assertEquals("", ime.getText());
     }
     @Test
     public void nameFieldTest(FxRobot robot) {
@@ -72,13 +72,13 @@ class MainTest {
     @Test
     public void jmbgValidationTest(FxRobot robot) {
         TextField jmbg = robot.lookup("#jmbg").queryAs(TextField.class);
-        robot.clickOn("#jmbg").write("0706996176304");
+        robot.clickOn("#jmbg").write("1310998195058");
         assertEquals(true, jmbg.getStyleClass().contains("poljeIspravno"));
     }
     @Test
     public void emailValidation(FxRobot robot) {
-        TextField email = robot.lookup("#emailField").queryAs(TextField.class);
-        robot.clickOn("#emailField").write("ahrustic.com");
+        TextField email = robot.lookup("#email").queryAs(TextField.class);
+        robot.clickOn("#email").write("ahrustic.com");
         assertEquals(true, email.getStyleClass().contains("poljeNijeIspravno"));
     }
     @Test
@@ -89,4 +89,4 @@ class MainTest {
     }
 
 
-}*/
+}

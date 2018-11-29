@@ -39,6 +39,7 @@ public class Controller {
     public String uporediSaJmbg;
     private boolean telefonValidno;
     public String datumZaIspis = "";
+    public String uporeditiDatum = "";
 
     public boolean formularValidan() {
         return (imeValidno && prezimeValidno && indeksValidan && jmbgValidno && datumValidno && emailValidno);
@@ -101,7 +102,8 @@ public class Controller {
     }
 
     private boolean ispravanJMBG(String n) {
-        if (n.length() < 13) return false;
+        if (n.length() < 13 || n.length() > 13) return false;
+        uporeditiDatum = n.substring(0, 6);
         int regija = (n.charAt(7) - '0') * 10 + (n.charAt(8) - '0');
         if (regija < 0 || regija > 96) return false;
         int jedinstveniBroj = (n.charAt(9) - '0') * 100 + (n.charAt(10) - '0') * 10 + (n.charAt(11) - '0');
